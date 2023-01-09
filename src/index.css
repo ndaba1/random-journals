@@ -59,3 +59,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+.neonText {
+  color: #fff;
+  text-shadow: 0 0 10px #fb923c;
+}
+
+.neonText:hover {
+  cursor: pointer;
+  color: #fff;
+  text-shadow: 0 0 8px #fb923c, 0 0 16px #fb923c, 0 0 24px #fb923c,
+    0 0 32px #fb923c;
+}
