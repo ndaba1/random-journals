@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-randomjournals-dev-163533-authRole",
+      "UnauthRoleArn": "arn:aws:iam::389643757183:role/amplify-randomjournals-dev-163533-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::389643757183:role/amplify-randomjournals-dev-163533-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-randomjournals-dev-163533-deployment",
+      "UnauthRoleName": "amplify-randomjournals-dev-163533-unauthRole",
+      "StackName": "amplify-randomjournals-dev-163533",
+      "StackId": "arn:aws:cloudformation:eu-central-1:389643757183:stack/amplify-randomjournals-dev-163533/aa562500-90eb-11ed-9f2b-06039d140498",
+      "AmplifyAppId": "d1kvw2tbiodyso"
+    },
+    "categories": {
+      "auth": {
+        "randomjournals78312fa1": {}
+      },
+      "api": {
+        "randomjournals": {}
+      }
+    }
+  }
+}
