@@ -66,3 +66,26 @@ button:focus-visible {
   text-shadow: 0 0 8px #fb923c, 0 0 16px #fb923c, 0 0 24px #fb923c,
     0 0 32px #fb923c;
 }
+
+[data-amplify-authenticator] [data-amplify-router] {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.amplify-button--primary {
+  background-color: #fb923c !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.amplify-button--primary:hover {
+  opacity: 0.8;
+}
+
+:root {
+  --amplify-components-button-primary-background-color: #fb923c;
+  --amplify-components-tabs-item-active-color: #fb923c;
+  --amplify-components-tabs-item-hover-color: #fb923c;
+  --amplify-components-tabs-item-active-border-color: #fb923c;
+  /* --amplify-components-tabs-item-hover-border-color: #fb923c; */
+}
