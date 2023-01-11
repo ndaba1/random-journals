@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "auth": {
+      "randomjournals78312fa1": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    },
+    "api": {
+      "randomjournals": [
+        "Query",
+        "Mutation",
+        "Subscription"
+      ]
+    },
+    "storage": {
+      "Entry:@model(appsync)": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "sendgridApiKey",
+      "environmentVariableName": "SENDGRID_API_KEY"
+    },
+    {
+      "cloudFormationParameterName": "sesSender",
+      "environmentVariableName": "SES_SENDER"
+    }
+  ]
+}
