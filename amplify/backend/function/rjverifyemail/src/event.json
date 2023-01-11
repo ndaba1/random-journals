@@ -1,0 +1,11 @@
+{
+  "httpMethod": "GET",
+  "path": "/verify",
+  "queryStringParameters": {
+    "limit": "10",
+    "email": "academyfefa@gmail.com"
+  },
+  "headers": {
+    "Content-Type": "application/json"
+  }
+}
