@@ -17,6 +17,14 @@
       },
       "api": {
         "randomjournals": {}
+      },
+      "function": {
+        "rjlambda": {
+          "deploymentBucketName": "amplify-randomjournals-dev-163533-deployment",
+          "s3Key": "amplify-builds/rjlambda-7663492b37624a584c50-build.zip",
+          "sendgridApiKey": "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",
+          "sesSender": "victormndaba@gmail.com"
+        }
       }
     }
   }
