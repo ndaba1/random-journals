@@ -94,7 +94,7 @@ exports.handler = async (event) => {
     sendMail(e, subject, text, html);
   });
 
-  console.log(`RESPONSE: ${body}`);
+  console.log(`ENTRIES: ${body.data.listEntries.items}`);
 
   return {
     statusCode,
