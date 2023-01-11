@@ -7,6 +7,8 @@ on:
 
 jobs:
   deploy:
+    env:
+      AWS_EXPORTS: ${{ secrets.EXPORTS }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,6 +18,10 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+
+      - name: Populate aws-exports
+        run: |
+          echo $AWS_EXPORTS > src/aws-exports.js
 
       - name: Build
         run: npm run build
