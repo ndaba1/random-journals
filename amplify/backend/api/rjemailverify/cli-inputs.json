@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/verify": {
+      "name": "/verify",
+      "lambdaFunction": "rjemailverify",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

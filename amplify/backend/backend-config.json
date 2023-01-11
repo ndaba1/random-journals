@@ -45,6 +45,20 @@
           "additionalAuthenticationProviders": []
         }
       }
+    },
+    "rjemailverify": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "rjemailverify",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   },
   "function": {
@@ -71,11 +85,10 @@
         }
       ]
     },
-    "rjverifyemail": {
+    "rjemailverify": {
       "build": true,
       "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
+      "service": "Lambda"
     }
   }
 }

@@ -16,7 +16,8 @@
         "randomjournals02b1611c": {}
       },
       "api": {
-        "randomjournals": {}
+        "randomjournals": {},
+        "rjemailverify": {}
       },
       "function": {
         "rjlambda": {
@@ -24,7 +25,10 @@
           "deploymentBucketName": "amplify-randomjournals-dev-125351-deployment",
           "s3Key": "amplify-builds/rjlambda-56664b78654264617272-build.zip"
         },
-        "rjverifyemail": {}
+        "rjemailverify": {
+          "deploymentBucketName": "amplify-randomjournals-dev-125351-deployment",
+          "s3Key": "amplify-builds/rjemailverify-595a6249424d75464d62-build.zip"
+        }
       }
     }
   }
