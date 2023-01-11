@@ -1,20 +1,56 @@
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import { Amplify, API, Auth, graphqlOperation } from "aws-amplify";
+import { SES } from "aws-sdk";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast, Toaster } from "react-hot-toast";
-import { Header } from "./components/Header";
-
 import { CreateEntryInput } from "./API";
+import { Header } from "./components/Header";
+import { createEntry } from "./graphql/mutations";
+
+const ses = new SES({
+  region: "eu-central-1",
+  credentials: {
+    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+    secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+  },
+});
+
 // @ts-ignore
 import awsExports from "./aws-exports";
-import { createEntry } from "./graphql/mutations";
 Amplify.configure(awsExports);
 
 function _App() {
   const [entry, setEntry] = useState("");
   const [loading, setLoading] = useState(false);
+  const [verified, setVerified] = useState(true);
+
+  useEffect(() => {
+    const fn = async () => {
+      const user = await Auth.currentUserInfo();
+      const email = user.attributes.email;
+
+      // Hack to allow SES to send emails in Sandbox mode
+      ses.listIdentities((err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          const verified = data.Identities.map((i) => i);
+          console.log(verified);
+          if (!verified.includes(email)) {
+            setVerified(false);
+            ses
+              .verifyEmailIdentity({ EmailAddress: email })
+              .promise()
+              .catch((e) => console.log(e));
+          }
+        }
+      });
+    };
+
+    fn();
+  }, []);
 
   const instructions = [
     "You will receive a new random entry in your email every 24 hours.",
@@ -58,6 +94,13 @@ function _App() {
 
   return (
     <main className="mx-auto max-w-5xl font-mono">
+      {!verified && (
+        <div className="bg-red-400 rounded-md mt-1  text-white p-3 text-center">
+          Looks like this is your first time using this app. You will need to
+          allow us to send emails to your account. Please check your inbox for a
+          link to verify Random Journals to send emails to your account.
+        </div>
+      )}
       <Header />
       <Toaster />
       <div className="w-full h-full flex flex-col md:flex-row gap-3 p-5 py-10 md:py-5 justify-between">
