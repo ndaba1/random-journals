@@ -36,5 +36,9 @@ jobs:
       - name: Install amplify CLI
         run: npm install -g @aws-amplify/cli
 
-      - name: Deploy
-        run: amplify publish
+      - name: Configure Amplify
+        run: |
+          amplify init --amplify "{\"envName\":\"prod\"}" --providers "{\"awscloudformation\": {\"useProfile\":true, \"profileName\":\"default\"}}" --yes
+
+      - name: Deploy to production
+        run: amplify publish --invalidateCloudFront --yes
