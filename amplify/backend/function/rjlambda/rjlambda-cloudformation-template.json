@@ -16,9 +16,12 @@
     "s3Key": {
       "Type": "String"
     },
-    "authrandomjournals78312fa1UserPoolId": {
+    "sesSender": {
+      "Type": "String"
+    },
+    "authrandomjournals02b1611cUserPoolId": {
       "Type": "String",
-      "Default": "authrandomjournals78312fa1UserPoolId"
+      "Default": "authrandomjournals02b1611cUserPoolId"
     },
     "apirandomjournalsGraphQLAPIIdOutput": {
       "Type": "String",
@@ -31,12 +34,6 @@
     "apirandomjournalsGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apirandomjournalsGraphQLAPIKeyOutput"
-    },
-    "sendgridApiKey": {
-      "Type": "String"
-    },
-    "sesSender": {
-      "Type": "String"
     }
   },
   "Conditions": {
@@ -92,8 +89,8 @@
             "REGION": {
               "Ref": "AWS::Region"
             },
-            "AUTH_RANDOMJOURNALS78312FA1_USERPOOLID": {
-              "Ref": "authrandomjournals78312fa1UserPoolId"
+            "AUTH_RANDOMJOURNALS02B1611C_USERPOOLID": {
+              "Ref": "authrandomjournals02b1611cUserPoolId"
             },
             "API_RANDOMJOURNALS_GRAPHQLAPIIDOUTPUT": {
               "Ref": "apirandomjournalsGraphQLAPIIdOutput"
@@ -130,9 +127,6 @@
                 ]
               ]
             },
-            "SENDGRID_API_KEY": {
-              "Ref": "sendgridApiKey"
-            },
             "SES_SENDER": {
               "Ref": "sesSender"
             }
@@ -155,12 +149,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "randomjournalsLambdaRole7fa77ec5",
+            "randomjournalsLambdaRole66ba7c03",
             {
               "Fn::Join": [
                 "",
                 [
-                  "randomjournalsLambdaRole7fa77ec5",
+                  "randomjournalsLambdaRole66ba7c03",
                   "-",
                   {
                     "Ref": "env"
@@ -346,7 +340,7 @@
                       },
                       ":userpool/",
                       {
-                        "Ref": "authrandomjournals78312fa1UserPoolId"
+                        "Ref": "authrandomjournals02b1611cUserPoolId"
                       }
                     ]
                   ]

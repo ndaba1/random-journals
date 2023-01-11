@@ -1,7 +1,7 @@
 {
   "permissions": {
     "auth": {
-      "randomjournals78312fa1": [
+      "randomjournals02b1611c": [
         "create",
         "read",
         "update",
@@ -26,10 +26,6 @@
   },
   "lambdaLayers": [],
   "environmentVariableList": [
-    {
-      "cloudFormationParameterName": "sendgridApiKey",
-      "environmentVariableName": "SENDGRID_API_KEY"
-    },
     {
       "cloudFormationParameterName": "sesSender",
       "environmentVariableName": "SES_SENDER"

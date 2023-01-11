@@ -8,8 +8,7 @@
     "@types/aws-lambda": "^8.10.92"
   },
   "dependencies": {
-    "@sendgrid/mail": "^7.7.0",
-    "aws-sdk": "^2.1291.0",
+    "aws-sdk": "^2.1292.0",
     "node-fetch": "2"
   }
 }

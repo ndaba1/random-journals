@@ -1,14 +1,13 @@
 /* Amplify Params - DO NOT EDIT
 	ENV
 	REGION
-	AUTH_RANDOMJOURNALS78312FA1_USERPOOLID
+	AUTH_RANDOMJOURNALS02B1611C_USERPOOLID
 	API_RANDOMJOURNALS_GRAPHQLAPIIDOUTPUT
 	API_RANDOMJOURNALS_GRAPHQLAPIENDPOINTOUTPUT
 	API_RANDOMJOURNALS_GRAPHQLAPIKEYOUTPUT
 	API_RANDOMJOURNALS_ENTRYTABLE_NAME
 	API_RANDOMJOURNALS_ENTRYTABLE_ARN
 	SES_SENDER
-	SENDGRID_API_KEY
 Amplify Params - DO NOT EDIT */
 
 // @ts-check
@@ -80,44 +79,74 @@ exports.handler = async (event) => {
   }
 
   const entries = body.data.listEntries.items;
-  const emails = entries.map((entry) => entry.author);
 
-  emails.forEach((e) => {
-    // shuffle entries to guarantee randomness
-    const shuffledEntries = entries.sort(() => 0.5 - Math.random());
-    // find entry not created by current email
-    const entry = shuffledEntries.find((entry) => entry.author !== e);
+  // get all emails
+  let emails = [];
+
+  // in case where author has multiple entries
+  for (const e of entries) {
+    if (!emails.includes(e.author)) emails.push(e.author);
+  }
+
+  // store sent entries
+  const sentEntries = [];
+
+  for (const e of emails) {
+    // sort entries to order entries that have not been sent yet first
+    const sortedEntries = entries.sort((a, b) => {
+      const aSent = sentEntries.find((entry) => entry.id === a.id);
+      const bSent = sentEntries.find((entry) => entry.id === b.id);
+
+      if (aSent && bSent) return 0; // both entries have been sent before
+      if (aSent) return 1; // a has been sent before, a should be sorted after b
+      if (bSent) return -1; // b has been sent before, b should be sorted after a
+      return 0;
+    });
+    // find first entry not created by current email
+    const entry = sortedEntries.find((entry) => entry.author !== e);
     // send email
     const subject = "Today's Random Journal";
     const text = `Greetings! Here's your Random Journal for today: ${entry.content}`;
     const html = `<p>Greetings!</p><p>Here's your Random Journal for today:</p><p>${entry.content}</p>`;
-    sendMail(e, subject, text, html);
-  });
+    await sendMail(e, subject, text, html);
+    // add entry to sent entries
+    sentEntries.push(entry);
+  }
 
   console.log(`ENTRIES: ${body.data.listEntries.items}`);
 
   return {
     statusCode,
-    body: JSON.stringify(body),
+    body: "completed successfully",
   };
 };
 
-function sendMail(to, subject, text, html) {
-  const sgMail = require("@sendgrid/mail");
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const msg = {
-    to, // Change to your recipient
-    from: process.env.SES_SENDER,
-    subject,
-    text,
-    html,
+async function sendMail(to, subject, text, html) {
+  const Params = {
+    Source: process.env.SES_SENDER || "",
+    Destination: {
+      ToAddresses: [to],
+    },
+    Message: {
+      Body: {
+        Html: {
+          Charset: "UTF-8",
+          Data: html,
+        },
+        Text: {
+          Charset: "UTF-8",
+          Data: text,
+        },
+      },
+      Subject: {
+        Charset: "UTF-8",
+        Data: subject,
+      },
+    },
   };
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log("Email sent");
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+
+  const AWS = require("aws-sdk");
+  const ses = new AWS.SES({ region: process.env.REGION });
+
+  await ses.sendEmail(Params).promise();
 }

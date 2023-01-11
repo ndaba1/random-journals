@@ -1,6 +1,6 @@
 {
   "auth": {
-    "randomjournals78312fa1": {
+    "randomjournals02b1611c": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
@@ -37,7 +37,9 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDays": 365,
+              "apiKeyExpirationDate": "2024-01-11T10:04:07.823Z",
+              "description": "rj-gql-key"
             }
           },
           "additionalAuthenticationProviders": []
@@ -53,7 +55,7 @@
       "dependsOn": [
         {
           "category": "auth",
-          "resourceName": "randomjournals78312fa1",
+          "resourceName": "randomjournals02b1611c",
           "attributes": [
             "UserPoolId"
           ]
@@ -68,13 +70,6 @@
           ]
         }
       ]
-    }
-  },
-  "hosting": {
-    "amplifyhosting": {
-      "service": "amplifyhosting",
-      "type": "cicd",
-      "lastPushTimeStamp": "2023-01-11T09:12:03.847Z"
     }
   }
 }

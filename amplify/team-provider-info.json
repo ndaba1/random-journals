@@ -1,35 +1,28 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-randomjournals-dev-163533-authRole",
-      "UnauthRoleArn": "arn:aws:iam::389643757183:role/amplify-randomjournals-dev-163533-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::389643757183:role/amplify-randomjournals-dev-163533-authRole",
+      "AuthRoleName": "amplify-randomjournals-dev-125351-authRole",
+      "UnauthRoleArn": "arn:aws:iam::389643757183:role/amplify-randomjournals-dev-125351-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::389643757183:role/amplify-randomjournals-dev-125351-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-randomjournals-dev-163533-deployment",
-      "UnauthRoleName": "amplify-randomjournals-dev-163533-unauthRole",
-      "StackName": "amplify-randomjournals-dev-163533",
-      "StackId": "arn:aws:cloudformation:eu-central-1:389643757183:stack/amplify-randomjournals-dev-163533/aa562500-90eb-11ed-9f2b-06039d140498",
-      "AmplifyAppId": "d1kvw2tbiodyso"
+      "DeploymentBucketName": "amplify-randomjournals-dev-125351-deployment",
+      "UnauthRoleName": "amplify-randomjournals-dev-125351-unauthRole",
+      "StackName": "amplify-randomjournals-dev-125351",
+      "StackId": "arn:aws:cloudformation:eu-central-1:389643757183:stack/amplify-randomjournals-dev-125351/dc0a2380-9195-11ed-9556-0a1e93d0bede",
+      "AmplifyAppId": "dmfosakqrasgr"
     },
     "categories": {
       "auth": {
-        "randomjournals78312fa1": {}
+        "randomjournals02b1611c": {}
       },
       "api": {
         "randomjournals": {}
       },
       "function": {
         "rjlambda": {
-          "deploymentBucketName": "amplify-randomjournals-dev-163533-deployment",
-          "s3Key": "amplify-builds/rjlambda-7663492b37624a584c50-build.zip",
-          "sendgridApiKey": "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",
-          "sesSender": "victormndaba@gmail.com"
-        }
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d1kvw2tbiodyso",
-          "type": "cicd"
+          "sesSender": "randomjournalsweb@gmail.com",
+          "deploymentBucketName": "amplify-randomjournals-dev-125351-deployment",
+          "s3Key": "amplify-builds/rjlambda-576b572b45417a4c6c79-build.zip"
         }
       }
     }
