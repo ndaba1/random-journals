@@ -28,15 +28,20 @@ jobs:
         run: npm run build
 
       - name: Configure aws
-        run: |
-          mkdir ~/.aws          
-          echo $AWS_PROFILE >> ~/.aws/credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Install amplify CLI
         run: npm install -g @aws-amplify/cli
 
       - name: Configure Amplify
         run: |
+          mkdir ~/.aws          
+          echo $AWS_PROFILE >> ~/.aws/credentials
+
           amplify init --amplify "{\"envName\":\"prod\"}" --providers "{\"awscloudformation\": {\"useProfile\":true, \"profileName\":\"rj-amplify\"}}" --yes
 
       - name: Deploy to production
