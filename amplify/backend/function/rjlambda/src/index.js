@@ -123,7 +123,7 @@ exports.handler = async (event) => {
 
 async function sendMail(to, subject, text, html) {
   const Params = {
-    Source: process.env.SES_SENDER || "",
+    Source: `Random Journals <${process.env.SES_SENDER}>`,
     Destination: {
       ToAddresses: [to],
     },
