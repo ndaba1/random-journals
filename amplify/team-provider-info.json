@@ -29,6 +29,12 @@
           "deploymentBucketName": "amplify-randomjournals-dev-125351-deployment",
           "s3Key": "amplify-builds/rjemailverify-595a6249424d75464d62-build.zip"
         }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dmfosakqrasgr",
+          "type": "manual"
+        }
       }
     }
   }
