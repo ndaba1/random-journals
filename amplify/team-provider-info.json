@@ -23,7 +23,7 @@
         "rjlambda": {
           "sesSender": "randomjournalsweb@gmail.com",
           "deploymentBucketName": "amplify-randomjournals-dev-125351-deployment",
-          "s3Key": "amplify-builds/rjlambda-56664b78654264617272-build.zip"
+          "s3Key": "amplify-builds/rjlambda-5a484c6943557348726b-build.zip"
         },
         "rjemailverify": {
           "deploymentBucketName": "amplify-randomjournals-dev-125351-deployment",

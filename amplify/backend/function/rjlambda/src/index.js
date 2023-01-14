@@ -18,8 +18,8 @@ const GRAPHQL_ENDPOINT =
 const GRAPHQL_API_KEY = process.env.API_RANDOMJOURNALS_GRAPHQLAPIKEYOUTPUT;
 
 const query = /* GraphQL */ `
-  query LIST_ENTRIES {
-    listEntries {
+  query LIST_ENTRIES($date: String!) {
+    listEntries(filter: {createdAt: {ge: $date}}) {
       items {
         id
         author
@@ -33,11 +33,7 @@ const query = /* GraphQL */ `
 // Date.now() - 24hrs should be >= createdAt of the entry
 // fetch all entries created in the last 24 hours
 const variables = {
-  filter: {
-    createdAt: {
-      ge: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
-    },
-  },
+  date: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString()
 };
 
 /**
@@ -78,7 +74,7 @@ exports.handler = async (event) => {
     };
   }
 
-  const entries = body.data.listEntries.items;
+  let entries = body.data.listEntries.items;
 
   // get all emails
   let emails = [];
@@ -88,10 +84,19 @@ exports.handler = async (event) => {
     if (!emails.includes(e.author)) emails.push(e.author);
   }
 
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
   // store sent entries
   const sentEntries = [];
 
   for (const e of emails) {
+    entries = shuffle(entries); // shuffle
     // sort entries to order entries that have not been sent yet first
     const sortedEntries = entries.sort((a, b) => {
       const aSent = sentEntries.find((entry) => entry.id === a.id);
